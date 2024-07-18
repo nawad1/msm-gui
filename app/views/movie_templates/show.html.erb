@@ -2,9 +2,11 @@
   Movie #<%= @the_movie.id %> details
 </h1>
 
+<div>
 <a href="/movies">
   Go back
 </a>
+</div>
 
 <hr>
 
@@ -48,13 +50,18 @@
     Director
   </dt>
   <dd>
+   
     <% dir_id = @the_movie.director_id %>
     
     <% matching_directors = Director.where({ :id => dir_id }) %>
     
     <% the_director = matching_directors.at(0) %>
-
-    <%= the_director.name %>
+    <%if the_director == nil%>
+        Uh no! We weren't able to find a director for this movie.
+    <%else %>
+       <%= the_director.name %>
+    <%end%>
+   
   </dd>
 
   <dt>
